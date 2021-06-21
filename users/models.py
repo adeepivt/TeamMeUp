@@ -22,7 +22,7 @@ class Profile(models.Model):
             image.thumbnail(output_size)
             image.save(self.img.path)
 
-class Manager(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    owner = models.ForiegnKey(User, on_delete=models.CASCADE)
-    turf = models.OneToOneField(Turf, on_delete=models.CASCADE)
+# class Manager(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='owner')
+    # turf = models.OneToOneField(Turf, on_delete=models.CASCADE)

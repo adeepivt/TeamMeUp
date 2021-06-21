@@ -5,7 +5,7 @@ from .forms import UserRegisterForm, UserProfileForm, VendorLoginForm
 
 # Create your views here
 
-def user_register(request):
+def admin_register(request):
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
         p_form = UserProfileForm(request.POST)
@@ -26,4 +26,23 @@ def user_register(request):
         'p_form':p_form,
     }
 
-    return render(request, 'users/register.html',content)
+    return render(request, 'users/admin_register.html',content)
+
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        account = authenticate(username=username, password=password)
+        if account is not None:
+            if account.profile.is_admin:
+                login(request, account)
+                return redirect('/')
+            messages.warning(request,f'username or password is incorrect')
+        else:
+            messages.warning(request,f'username or password is incorrect')
+    
+    form = VendorLoginForm()
+
+    context = {'form':form}
+
+    return render(request, 'users/admin_login.html', context)
