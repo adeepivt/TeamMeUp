@@ -6,9 +6,10 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=30, blank=True)
+    place = models.CharField(max_length=30, blank=True)
     mobile = models.CharField(max_length=20)
     is_admin = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
     img = models.ImageField(default='tmu_logo.jpg', upload_to='profile_pics')
 
     def __str__(self):

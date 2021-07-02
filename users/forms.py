@@ -25,8 +25,8 @@ class UserProfileForm(forms.ModelForm):
         fields = ['mobile','location','img']
 
 
-class VendorLoginForm(AuthenticationForm):
+class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
-        super(VendorLoginForm, self).__init__(*args, **kwargs)
+        super(UserLoginForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['placeholder'] = visible.name

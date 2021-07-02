@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('users.urls')),
     path('turfs/',include('turf.urls')),
-    path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logout/',auth_views.LogoutView.as_view(), name='logout'),
 ]
 
 if settings.DEBUG:
