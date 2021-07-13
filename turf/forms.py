@@ -14,4 +14,4 @@ class TurfCreateForm(forms.ModelForm):
 class TurfUpdateForm(forms.ModelForm):
     class Meta:
         model = Turf
-        fields = ['name','place','price','details','image']
+        fields = ['name','place','price']

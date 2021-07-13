@@ -10,7 +10,7 @@ class Profile(models.Model):
     mobile = models.CharField(max_length=20)
     is_admin = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
-    img = models.ImageField(default='tmu_logo.jpg', upload_to='profile_pics')
+    img = models.ImageField(default='tmu_logo.jpg', upload_to='profile_pics/')
 
     def __str__(self):
         return self.user.username

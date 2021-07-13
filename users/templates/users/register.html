@@ -7,7 +7,7 @@
     <title>Admin - Register</title>
 </head>
 <body>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{u_form}}
         {{p_form}}

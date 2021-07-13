@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, UserProfileForm, UserLoginForm
@@ -8,15 +8,16 @@ from .forms import UserRegisterForm, UserProfileForm, UserLoginForm
 def admin_register(request):
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
-        p_form = UserProfileForm(request.POST)
+        p_form = UserProfileForm(request.POST, request.FILES)
         if u_form.is_valid() and p_form.is_valid():
             new_user = u_form.save()
             profile = p_form.save(commit=False)
             if profile.user_id is None:
                 profile.user_id = new_user.id
-            profile.save()
+                profile.is_admin = True
+                profile.save()
             messages.success(request,f'profile created')
-            return redirect('login')
+            return redirect('/')
     else:
         u_form = UserRegisterForm()
         p_form = UserProfileForm()

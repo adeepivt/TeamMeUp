@@ -22,7 +22,7 @@ class UserRegisterForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['mobile','location','img']
+        fields = ['mobile','place','img']
 
 
 class UserLoginForm(AuthenticationForm):
