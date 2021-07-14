@@ -37,7 +37,7 @@ def admin_login(request):
         if account is not None:
             if account.profile.is_admin:
                 login(request, account)
-                return redirect('/')
+                return redirect('admin-home')
             messages.warning(request,f'username or password is incorrect')
         else:
             messages.warning(request,f'username or password is incorrect')
@@ -51,7 +51,7 @@ def admin_login(request):
 def user_register(request):
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
-        p_form = UserProfileForm(request.POST)
+        p_form = UserProfileForm(request.POST, request.FILES)
         if u_form.is_valid() and p_form.is_valid():
             new_user = u_form.save()
             profile = p_form.save(commit=False)
@@ -59,7 +59,7 @@ def user_register(request):
                 profile.user_id = new_user.id
             profile.save()
             messages.success(request,f'profile created')
-            return redirect('login')
+            return redirect('/')
     else:
         u_form = UserRegisterForm()
         p_form = UserProfileForm()
@@ -83,7 +83,7 @@ def user_login(request):
             else:
                 if valuenext == '':
                     login(request, account)
-                    return redirect('event-home')
+                    return redirect('/')
                 else:
                     login(request, account)
                     return redirect(valuenext)

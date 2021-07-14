@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Turf
 from .forms import TurfCreateForm
+from users.forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -9,18 +10,18 @@ def home_page(request):
         admin = False
         if request.user.profile.is_admin:
             admin = True
-            return render(request, 'turfs/index.html', {'admin' : admin})
+            return render(request, 'turf/index.html', {'admin' : admin})
         else:
-            return render(request, 'turfs/index.html', {'admin' : admin})
+            return render(request, 'turf/index.html', {'admin' : admin})
     turfs = Turf.objects.all()
     content = {
         'turfs':turfs,
     }
 
-    return render(request, 'events/index.html', content)
+    return render(request, 'turf/index.html', content)
 
 @login_required
-def search_event(request):
+def search_turf(request):
     user = request.user
     fav = bool
     l = []
@@ -44,9 +45,11 @@ def turf_list(request):
 
 def add_turf(request):
     form = TurfCreateForm()
+    managerForm = UserRegisterForm()
     content = {
-        'form' : form
+        'form' : form,
+        'managerForm' : managerForm
     }
-    return render(request, 'turf/turf_list.html', content)
+    return render(request, 'turf/admin_home.html', content)
 
 

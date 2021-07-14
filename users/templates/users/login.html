@@ -9,7 +9,15 @@
 <body>
     <form action="" method="POST">
         {% csrf_token %}
+        
+        {% if messages %}
+            {% for message in  messages %}
+              <h1>{{message}}</h1>
+            {% endfor %}
+        {% endif %}
+            
         {{form}}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
         <button type="submit">Login</button>
     </form>
 </body>
