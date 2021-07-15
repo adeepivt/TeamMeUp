@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>home</title>
 </head>
 <body>
     <!-- Base Template -->
+
+    {% if user.is_authenticated %}
+                                    {% if user.profile.is_admin %}
+                                    <a class="nav-link" href="">Add New</a>
+                                    {% else %}
+                                        <a href="">Favourites</a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'user_login' %}">Sign in  or Register</a>
+                                
+                            </div>
+                                <!-- Add listings btn -->
+                                <div class="dorne-add-listings-btn">
+                                    <a href="{% url 'admin_login' %}" class="btn dorne-btn">+ Partner With Us.</a>
+                                </div>
+                                {% endif %}
+    <!-- ***** Header Area End ***** -->
+    
+    {% block content %}{% endblock content %}
+
 </body>
 </html>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, UserProfileForm, UserLoginForm
-
+from turf.forms import TurfCreateForm
 # Create your views here
 
 def admin_register(request):
@@ -47,6 +47,15 @@ def admin_login(request):
     context = {'form':form}
 
     return render(request, 'users/login.html', context)
+
+def admin_home(request):
+    form = TurfCreateForm()
+    managerForm = UserRegisterForm()
+    content = {
+        'form' : form,
+        'managerForm' : managerForm
+    }
+    return render(request, 'users/admin_home.html', content)
 
 def user_register(request):
     if request.method == 'POST':
