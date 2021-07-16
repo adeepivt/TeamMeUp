@@ -43,13 +43,4 @@ def turf_list(request):
     }
     return render(request, 'turf/turf_list.html', content)
 
-def add_turf(request):
-    form = TurfCreateForm()
-    managerForm = UserRegisterForm()
-    content = {
-        'form' : form,
-        'managerForm' : managerForm
-    }
-    return render(request, 'turf/admin_home.html', content)
-
 

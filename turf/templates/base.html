@@ -12,8 +12,10 @@
     {% if user.is_authenticated %}
                                     {% if user.profile.is_admin %}
                                     <a class="nav-link" href="">Add New</a>
+                                    <a href="{% url 'logout' %}">logout</a>
                                     {% else %}
                                         <a href="">Favourites</a>
+                                        <a href="{% url 'logout' %}">logout</a>
                                     {% endif %}
                                 {% else %}
                                     <a href="{% url 'user_login' %}">Sign in  or Register</a>

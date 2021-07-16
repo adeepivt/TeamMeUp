@@ -37,7 +37,7 @@ def admin_login(request):
         if account is not None:
             if account.profile.is_admin:
                 login(request, account)
-                return redirect('admin-home')
+                return redirect('admin_home')
             messages.warning(request,f'username or password is incorrect')
         else:
             messages.warning(request,f'username or password is incorrect')
