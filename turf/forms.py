@@ -4,7 +4,7 @@ from .models import Turf
 class TurfCreateForm(forms.ModelForm):
     class Meta:
         model = Turf
-        fields = '__all__'
+        fields = ['name', 'place', 'price', 'address', ]
     
     def __init__(self, *args, **kwargs):
         super(TurfCreateForm, self).__init__(*args, **kwargs)

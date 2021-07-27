@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .forms import UserRegisterForm, UserProfileForm, UserLoginForm
 from turf.forms import TurfCreateForm
-# Create your views here
+from django.contrib.auth.decorators import login_required
+
 
 def admin_register(request):
     if request.method == 'POST':
@@ -48,9 +49,22 @@ def admin_login(request):
 
     return render(request, 'users/login.html', context)
 
+@login_required
 def admin_home(request):
-    form = TurfCreateForm()
-    managerForm = UserRegisterForm()
+    if request.method == 'POST':
+        form = TurfCreateForm(request.POST)
+        managerForm = UserRegisterForm(request.POST)
+        if form.is_valid() and managerForm.is_valid():
+            m = managerForm.save()
+            instance = form.save(commit=False)
+            instance.owner = request.user
+            if instance.manager_id is None:
+                instance.manager_id = m.id
+                instance.save()
+                return redirect('home')
+    else:
+        form = TurfCreateForm()
+        managerForm = UserRegisterForm()
     content = {
         'form' : form,
         'managerForm' : managerForm

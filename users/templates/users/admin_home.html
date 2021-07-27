@@ -2,7 +2,11 @@
 
 
 {% block content %}
-    {{form.as_p}}
-    {{managerForm.as_p}}]
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{managerForm.as_p}}
+        <button type="submit">Submit</button>
+    </form>
   
 {% endblock content %}
